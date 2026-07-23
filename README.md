@@ -1,112 +1,110 @@
 # Pokémon Rejuvenation — Co-op / Multiplayer Mod
 
-Ein Fan-Mod, der **Mehrspieler** in [Pokémon Rejuvenation](https://www.rebornevolved.org/) **V14** bringt:
-Ihr lauft gemeinsam durch dieselbe Welt und seht euch in Echtzeit bewegen — dazu
-kooperative Sync-Kämpfe, PvP und Tausch.
+A fan-made mod that brings **multiplayer** to [Pokémon Rejuvenation](https://www.rebornevolved.org/)
+**V14**: walk through the same world together and see each other move in real time —
+plus co-op sync battles, PvP and trading.
 
-> ⚠️ **Dieses Repo enthält NICHT das Spiel.** Es ist nur eine Modifikation.
-> Jeder Mitspieler braucht seine **eigene, legale Rejuvenation-V14-Installation
-> (Windows)**. „Pokémon" ist eine Marke von Nintendo / Game Freak / The Pokémon
-> Company. Dieses Projekt ist weder mit ihnen noch mit dem Rejuvenation-Team
-> verbunden oder von ihnen unterstützt.
+> ⚠️ **This repo does NOT contain the game.** It is only a modification.
+> Every player needs their own legal copy of Pokémon Rejuvenation V14 (Windows).
+> "Pokémon" is a trademark of Nintendo / Game Freak / The Pokémon Company. This
+> project is not affiliated with or endorsed by them or by the Rejuvenation team.
 
 ---
 
 ## Features
 
-| Bereich | Status |
+| Area | Status |
 |---|---|
-| Spieler auf derselben Map sehen + flüssige Bewegung | ✅ |
-| Namensschilder über Mitspielern | ✅ |
-| Kooperative Sync-Kämpfe (Boss-Wildmon + Trainer, Lockstep, deterministisch) | ✅ |
-| PvP (eigene Perspektive, Sieg/Niederlage-Bilanz) | ✅ |
-| Tausch (Partner wählen, beidseitige Bestätigung, Dupe-Schutz) | ✅ |
-| Multiplayer-Menü im Pausemenü (PvP & Trading) | ✅ |
-| Internet-Verbindung über [ZeroTier](https://www.zerotier.com/) | ✅ |
+| See other players on the same map + smooth movement | ✅ |
+| Name tags above other players | ✅ |
+| Co-op sync battles (boss wild + trainer, lockstep, deterministic) | ✅ |
+| PvP (own perspective, win/loss record) | ✅ |
+| Trading (pick a partner, two-sided confirm, dupe protection) | ✅ |
+| Multiplayer menu in the pause menu (PvP & Trading) | ✅ |
+| Internet play over [ZeroTier](https://www.zerotier.com/) | ✅ |
 
-**Bewusst nicht enthalten:** geteilte Story-Flags, synchronisierte Cutscenes, Anti-Cheat.
-
----
-
-## Schnellstart für Mitspieler (Beitreten)
-
-Du willst dem Spiel eines Freundes beitreten:
-
-1. **Installer holen:** Diesen Ordner (bzw. das Release-ZIP) herunterladen.
-2. **Join-Code besorgen:** Dein Host schickt dir einen *Join-Code* (ein langer Text).
-3. **`installer/install.bat` doppelklicken.**
-   - Rejuvenation-Ordner wählen (der mit `Game.exe` / `Rejuvenation.exe`).
-   - Join-Code einfügen → **„Mod installieren + verbinden"**.
-4. **ZeroTier** installieren (Button im Installer) und dem Netzwerk beitreten.
-   Dein Host muss dein Gerät danach einmalig **freischalten** (siehe unten).
-5. **Spiel starten.** Ihr solltet euch auf derselben Map sehen.
+**Deliberately out of scope:** shared story flags, synchronized cutscenes, anti-cheat.
 
 ---
 
-## Schnellstart für den Host (Spiel bereitstellen)
+## Quick start for players (joining)
 
-Du hostest die Runde:
+You want to join a friend's game:
 
-1. **Node.js** (LTS) installieren.
-2. **Relay starten:**
+1. **Get the installer:** download this repo (or the release ZIP).
+2. **Get a join code:** your host sends you a *join code* (one long text string).
+3. **Double-click `installer/install.bat`.**
+   - Pick your Rejuvenation folder (the one with `Game.exe` / `Rejuvenation.exe`).
+   - Paste the join code → **"Install mod + connect"**.
+4. **Install ZeroTier** (button in the installer) and join the network.
+   Your host then has to **authorize** your device once (see below).
+5. **Start the game.** You should see each other on the same map.
+
+---
+
+## Quick start for the host (providing the game)
+
+You host the session:
+
+1. Install **Node.js** (LTS).
+2. **Start the relay:**
    ```bat
    node server/relay.js
    ```
-   Der Relay lauscht auf TCP-Port `7777`. Ein Token wird beim ersten Start in
-   `server/token.txt` erzeugt (oder per `COOP_TOKEN` gesetzt).
-3. **ZeroTier** installieren, ein Netzwerk erstellen (my.zerotier.com) und beitreten.
-4. **Join-Code erzeugen:**
+   The relay listens on TCP port `7777`. A token is generated on first start in
+   `server/token.txt` (or set it via `COOP_TOKEN`).
+3. Install **ZeroTier**, create a network (my.zerotier.com) and join it.
+4. **Generate a join code:**
    ```bat
    powershell -ExecutionPolicy Bypass -File installer\make-joincode.ps1
    ```
-   Der Code bündelt ZeroTier-Netz-ID + deine ZeroTier-IP:Port + Token. An
-   Mitspieler weitergeben.
-5. **Mitspieler freischalten:** my.zerotier.com → dein Netzwerk → *Members* →
-   Haken bei „Auth" für jedes neue Gerät.
-6. **Firewall:** Eingehend TCP `7777` erlauben (siehe `docs/internet-setup.md`).
+   The code bundles ZeroTier network ID + your ZeroTier IP:port + token. Send it
+   to your players.
+5. **Authorize players:** my.zerotier.com → your network → *Members* → tick "Auth"
+   for each new device.
+6. **Firewall:** allow inbound TCP `7777` (see `docs/internet-setup.md`).
 
-Ein grafischer Launcher (Host/Join/ZeroTier-Status) liegt unter
-`server/launcher-gui.ps1` (`server/start-launcher.bat`).
+A graphical launcher (host/join/ZeroTier status) is in `server/launcher-gui.ps1`
+(`server/start-launcher.bat`).
 
 ---
 
-## Voraussetzungen
+## Requirements
 
 - Windows 10/11
-- Pokémon Rejuvenation **V14** (Windows-Version, mkxp-z)
-- [ZeroTier](https://www.zerotier.com/download/) (kostenlos) — für Internet-Spiel
-- Nur der **Host**: [Node.js](https://nodejs.org/) LTS (für den Relay)
+- Pokémon Rejuvenation **V14** (Windows version, mkxp-z)
+- [ZeroTier](https://www.zerotier.com/download/) (free) — for internet play
+- Host only: [Node.js](https://nodejs.org/) LTS (for the relay)
 
 ---
 
-## Wie es funktioniert (kurz)
+## How it works (short)
 
-- Die Mod (`mod/coop.rb`, `mod/coop_menu.rb`) wird über Rejuvenations offizielles
-  Mod-System nach `patch/Mods/` geladen — **kein** Eingriff in `Scripts.rxdata`.
-- Ein kleiner **TCP-Relay** (`server/relay.js`) verteilt zeilenweise JSON zwischen
-  den Clients (Positionen, Kampf-Kommandos, Tausch, PvP). Kein State, keine History.
-- **ZeroTier** legt ein privates, verschlüsseltes Overlay-Netz über das Internet;
-  die Clients verbinden sich zur ZeroTier-IP des Hosts. Der Relay ist per Token
-  geschützt.
+- The mod (`mod/coop.rb`, `mod/coop_menu.rb`) loads through Rejuvenation's official
+  mod system into `patch/Mods/` — **no** patching of `Scripts.rxdata`.
+- A small **TCP relay** (`server/relay.js`) forwards line-delimited JSON between
+  clients (positions, battle commands, trades, PvP). No state, no history.
+- **ZeroTier** creates a private, encrypted overlay network over the internet;
+  clients connect to the host's ZeroTier IP. The relay is protected by a token.
 
-Mehr Details: [`docs/status.md`](docs/status.md), [`docs/internet-setup.md`](docs/internet-setup.md).
-
----
-
-## Fehlersuche
-
-Die Mod schreibt Logs in den Spielordner:
-
-- `coop_error.txt` — Ladefehler / Ausnahmen (wichtigste Datei bei Problemen)
-- `coop_net.txt` — Verbindungsstatus zum Relay
-- `coop_battle.txt` — Kampf-Sync
-
-Häufige Ursachen: falscher/fehlender Join-Code (`coop_config.txt`), Relay läuft
-nicht, ZeroTier-Gerät nicht freigeschaltet, Firewall blockt TCP 7777.
+More detail: [`docs/status.md`](docs/status.md), [`docs/internet-setup.md`](docs/internet-setup.md).
 
 ---
 
-## Lizenz
+## Troubleshooting
 
-MIT — siehe [`LICENSE`](LICENSE). Gilt nur für den Code dieses Repos, **nicht**
-für Pokémon Rejuvenation oder Pokémon-Inhalte.
+The mod writes logs into the game folder:
+
+- `coop_error.txt` — load errors / exceptions (most important file when something breaks)
+- `coop_net.txt` — connection status to the relay
+- `coop_battle.txt` — battle sync
+
+Common causes: wrong/missing join code (`coop_config.txt`), relay not running,
+ZeroTier device not authorized, firewall blocking TCP 7777.
+
+---
+
+## License
+
+MIT — see [`LICENSE`](LICENSE). Applies only to this repo's code, **not** to
+Pokémon Rejuvenation or any Pokémon content.
