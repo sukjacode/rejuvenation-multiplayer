@@ -1,0 +1,33 @@
+# --- Secrets / lokale Konfiguration -- NIEMALS veroeffentlichen ---
+server/token.txt
+server/launcher_settings.json
+**/coop_config.txt
+
+# --- Laufzeit-Logs (entstehen im Spielordner) ---
+coop_error.txt
+coop_net.txt
+coop_battle.txt
+coop_clone.txt
+coop_*.txt
+!mod/coop_config.example.txt
+
+# --- Spielstaende / Spieldateien (Copyright -- nie mitliefern) ---
+*.rxdata
+*.rgss*
+game/
+
+# --- Node ---
+node_modules/
+npm-debug.log*
+
+# --- Dev-/Recon-Reste (nicht Teil des Releases) ---
+mod/hello.rb
+mod/net.rb
+mod/netcheck.rb
+server/bot.js
+server/testclient.js
+
+# --- OS ---
+Thumbs.db
+Desktop.ini
+.DS_Store

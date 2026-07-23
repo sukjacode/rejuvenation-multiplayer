@@ -1,0 +1,20 @@
+# coop_config.txt -- Relay-Adresse fuer den Co-op-Mod.
+# Diese Datei gehoert in den Spielordner (neben Rejuvenation.exe), umbenannt zu:
+#   coop_config.txt
+#
+# Eine Zeile: entweder nur der Host, oder host:port.
+# Zeilen mit fuehrendem # werden ignoriert.
+# Fehlt die Datei komplett -> Fallback 127.0.0.1:7777 (lokaler Test).
+#
+# Beispiel lokal:
+#   127.0.0.1:7777
+#
+# Beispiel ueber Tailscale (die 100.x-IP des Rechners, der den Relay hostet):
+#   100.101.102.103:7777
+#
+# Mit Passwort (Tunnel-Betrieb): zusaetzlich eine token-Zeile.
+# Der Wert muss exakt dem Token des Relays entsprechen (server/token.txt bzw.
+# env COOP_TOKEN beim Host).
+
+server = 100.101.102.103:7777
+token  = geheimespasswort
