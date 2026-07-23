@@ -12,8 +12,8 @@
 
 # --- Fallback-Download-Quelle (nur falls die Mod-Dateien nicht mitgeliefert sind) ---
 # Nach dem Anlegen des GitHub-Repos hier Owner/Name eintragen:
-$RepoOwner  = "REPLACE_ME"
-$RepoName   = "rejuvenation-coop"
+$RepoOwner  = "sukjacode"
+$RepoName   = "rejuvenation-multiplayer"
 $RepoBranch = "main"
 
 $ErrorActionPreference = "Stop"
